@@ -107,7 +107,7 @@ class RegRequests:
 
 	# Функция для получения одного элемента из БД
 	# Если не указать, что мы возвращаем первый элемент _one, то возвращает tuple
- 	def fetch_one(dataBase: str, table_name: str, column_name: str, condition: str, condition_value: str | int) -> str | None:
+	def fetch_one(dataBase: str, table_name: str, column_name: str, condition: str, condition_value: str | int) -> str | None:
 		# Пробуем получить элемент при конкретной записи
 		try:
 			# Пока Бд открыта - делаем свои делишки!

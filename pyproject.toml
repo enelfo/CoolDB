@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "example_package_CoolDB"
+name = "CoolDB"
 version = "0.1.0"
 authors = [
   { name="enelfo", email="enelfo0911@gmail.com" },
