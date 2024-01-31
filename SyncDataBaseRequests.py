@@ -2,18 +2,18 @@ import sqlite3 as sq
 
 
 
-class RegRequest:
+class RegRequests:
 	# Функция получения БД
 	# parameters: str(tuple(str(SQLtypes_vars, )))
 	# Параметры должны быть строкой из кортеж из строки CQL команд, точнее сказать SQL переменны, в которые будет происходить запись
-	def get_db(dataBase: str, table_name: str, parameters: str) -> bool:
+	def get_db(dataBase: str, table_name: str, columns: str) -> bool:
 
 		# Пробуем подключиться к БД, создаем записи, если их нет и возвращаем истину
 		try:
 			# Пока Бд открыта - делаем свои делишки!
 			with sq.connect(dataBase) as conn:
 				cur = conn.cursor()
-				cur.execute(f"CREATE TABLE IF NOT EXISTS {table_name} {parameters}")
+				cur.execute(f"CREATE TABLE IF NOT EXISTS {table_name} {columns}")
 				cur.close()
 
 				return True
@@ -24,7 +24,7 @@ class RegRequest:
 
 
 	# Функция записи в БД
-	def insert_to_db(dataBase: str, table_name: str, parameters: list[str]) -> bool:
+	def insert_to_db(dataBase: str, table_name: str, parameters: list) -> bool:
 		# Пробуем в цикле отформатировать полученную строку и записать ее в БД
 		try:
 			lp = len(parameters)
@@ -53,7 +53,7 @@ class RegRequest:
 
 
 	# Функция записи в БД
-	def insert_to_db_one_par(dataBase: str, table_name: str, column_name: str | list[str], parameter: str | list[str]) -> bool:# Параматры следует передавать так: "'parameters'"
+	def insert_to_db_one_par(dataBase: str, table_name: str, column_name: str | list[str], parameter: str) -> bool:# Параматры следует передавать так: "'parameters'"
 		try:
 			# Пока Бд открыта - делаем свои делишки!
 			with sq.connect(dataBase) as conn:
@@ -70,7 +70,7 @@ class RegRequest:
 
 
 	# Функция получения всего при конкретной записи
-	def fetch_all_where(dataBase: str, table_name: str, condition: str, condition_value: str) -> list[tuple]:
+	def fetch_all_where(dataBase: str, table_name: str, condition: str, condition_value: str | int) -> list[dict] | None:
 		# Пробуем получить все данные расположенные при конкретной записи
 		try:
 			# Пока Бд открыта - делаем свои делишки!
@@ -88,7 +88,7 @@ class RegRequest:
 
 
 	# Функция получения всего
-	def fetch_all(dataBase: str, table_name: str) -> list[tuple] | None:
+	def fetch_all(dataBase: str, table_name: str) -> list[dict] | None:
 		# Пробуем получить все данные
 		try:
 			# Пока Бд открыта - делаем свои делишки!
@@ -107,7 +107,7 @@ class RegRequest:
 
 	# Функция для получения одного элемента из БД
 	# Если не указать, что мы возвращаем первый элемент _one, то возвращает tuple
- 	def fetch_one(dataBase: str, table_name: str, column_name: str, condition: str, condition_value: str) -> str | None:
+ 	def fetch_one(dataBase: str, table_name: str, column_name: str, condition: str, condition_value: str | int) -> str | None:
 		# Пробуем получить элемент при конкретной записи
 		try:
 			# Пока Бд открыта - делаем свои делишки!
@@ -147,7 +147,7 @@ class RegRequest:
 
 
 	# Функция обновления элемента в таблице БД
-	def update_table(dataBase: str, table_name: str, column_name: str, new_meaning: str, condition: str, condition_value: str) -> bool:
+	def update_table(dataBase: str, table_name: str, column_name: str, new_meaning: str, condition: str, condition_value: str | int) -> bool:
 		# Побуем заапдейтить элемент
 		try:
 			# Пока Бд открыта - делаем свои делишки!
@@ -165,7 +165,7 @@ class RegRequest:
 
 
 	# Функция удаляет элемент из таблицы в БД
-	def delete_from_table(dataBase: str, table_name: str, condition: str, condition_value: str) -> bool:
+	def delete_from_table(dataBase: str, table_name: str, condition: str, condition_value: str | int) -> bool:
 		# Пробуем удалить информацию из таблицы из БД в конкретном месте
 		try:
 			# Пока Бд открыта - делаем свои делишки!
