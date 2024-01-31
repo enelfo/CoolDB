@@ -13,7 +13,7 @@
 
 ```python3
 
-from FastDB.SyncDataBaseRequests import RegRequests
+from CoolDB.SyncDataBaseRequests import RegRequests
 
 
 
@@ -58,7 +58,7 @@ if __name__ == "__main__":
 ```python3
 
 import asyncio
-from FastDB.AsyncDataBaseRequests import RegRequests
+from CoolDB.AsyncDataBaseRequests import RegRequests
 
 
 
@@ -98,7 +98,7 @@ if __name__ == "__main__":
 
 
 <h3 align="center">Документация</h3>
-<h6 align="center">В FastDB собраны регулярные функции взаимодействия с базами данных и помещены в класс RegRequest модуля SyncDataBaseRequests или AsyncDataBaseRequests:</h6>
+<h6 align="center">В CoolDB собраны регулярные функции взаимодействия с базами данных и помещены в класс RegRequest модуля SyncDataBaseRequests или AsyncDataBaseRequests:</h6>
 <h1></h1>
 
 
