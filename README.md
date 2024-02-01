@@ -154,7 +154,7 @@ if RegRequests.get_db(
 
 ```python3
 
-insert_to_db(dataBase: str, table_name: str, parameters: str) -> bool
+insert_to_db(dataBase: str, table_name: str, parameters: list) -> bool
 
 
 ```
@@ -197,7 +197,7 @@ if RegRequests.insert_to_db(
 
 ```python3
 
-insert_to_db_one_par(dataBase: str, table_name: str, column_name: str | list[str], parameter: str | list[str]) -> bool
+insert_to_db_one_par(dataBase: str, table_name: str, column_name: str | list[str], parameter: str) -> bool
 
 
 ```
