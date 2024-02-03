@@ -1,3 +1,4 @@
+import traceback
 import aiosqlite as sq
 
 
@@ -18,6 +19,7 @@ class RegRequests:
 
 		# При исключение возвращаем ложь
 		except Exception as e:
+			print(traceback.format_exc())
 			return False
 
 
@@ -45,6 +47,7 @@ class RegRequests:
 
 		# При исключение возвращаем ложь
 		except Exception as e:
+			print(traceback.format_exc())
 			return False
 
 
@@ -60,6 +63,7 @@ class RegRequests:
 
 		# При исключение возвращаем ложь
 		except Exception as e:
+			print(traceback.format_exc())
 			return False
 
 
@@ -76,6 +80,7 @@ class RegRequests:
 
 		# При исключение возвращаем NoneType
 		except Exception as e:
+			print(traceback.format_exc())
 			return None
 
 
@@ -92,6 +97,7 @@ class RegRequests:
 
 		# При исключение возвращаем NoneType
 		except Exception as e:
+			print(traceback.format_exc())
 			return None
 
 
@@ -114,6 +120,7 @@ class RegRequests:
 
 		# При исключение возвращаем NoneType
 		except Exception as e:
+			print(traceback.format_exc())
 			return None
 
 
@@ -128,6 +135,7 @@ class RegRequests:
 
 		# При исключение возвращаем ложь
 		except Exception as e:
+			print(traceback.format_exc())
 			return False
 
 
@@ -143,6 +151,7 @@ class RegRequests:
 
 		# При исключение возвращаем ложь
 		except Exception as e:
+			print(traceback.format_exc())
 			return False
 
 
@@ -158,7 +167,7 @@ class RegRequests:
 
 		# При исключение возвращаем ложь
 		except Exception as e:
-			print(e)
+			print(traceback.format_exc())
 			return False
 
 
@@ -173,12 +182,7 @@ class RegRequests:
 
 		# При исключение возвращаем ложь
 		except Exception as e:
+			print(traceback.format_exc())
 			return False
-
-
-
-
-
-
 
 

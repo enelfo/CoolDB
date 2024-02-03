@@ -20,6 +20,7 @@ class RegRequests:
 
 		# При исключение возвращаем ложь
 		except Exception as e:
+			print(traceback.format_exc())
 			return False
 
 
@@ -49,6 +50,7 @@ class RegRequests:
 
 		# При исключение возвращаем ложь
 		except Exception as e:
+			print(traceback.format_exc())
 			return False
 
 
@@ -66,6 +68,7 @@ class RegRequests:
 
 		# При исключение возвращаем ложь
 		except Exception as e:
+			print(traceback.format_exc())
 			return False
 
 
@@ -84,6 +87,7 @@ class RegRequests:
 
 		# При исключение возвращаем NoneType
 		except Exception as e:
+			print(traceback.format_exc())
 			return None
 
 
@@ -102,6 +106,7 @@ class RegRequests:
 
 		# При исключение возвращаем NoneType
 		except Exception as e:
+			print(traceback.format_exc())
 			return None
 
 
@@ -126,6 +131,7 @@ class RegRequests:
 
 		# При исключение возвращаем NoneType
 		except Exception as e:
+			print(traceback.format_exc())
 			return None
 
 
@@ -143,6 +149,7 @@ class RegRequests:
 
 		# При исключение возвращаем ложь
 		except Exception as e:
+			print(traceback.format_exc())
 			return False
 
 
@@ -161,6 +168,7 @@ class RegRequests:
 
 		# При исключение возвращаем ложь
 		except Exception as e:
+			print(traceback.format_exc())
 			return False
 
 
@@ -179,6 +187,7 @@ class RegRequests:
 
 		# При исключение возвращаем ложь
 		except Exception as e:
+			print(traceback.format_exc())
 			print(e)
 			return False
 
@@ -197,12 +206,7 @@ class RegRequests:
 
 		# При исключение возвращаем ложь
 		except Exception as e:
+			print(traceback.format_exc())
 			return False
-
-
-
-
-
-
 
 
