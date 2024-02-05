@@ -369,6 +369,55 @@ if RegRequests.fetch_one(
 
 
 
+<h5 align="center">Функция fetch_one_column()</h5>
+<h6 align="center">Функция fetch_one_column() используется для извлечения всех элементов одного столбца таблицы.</h6>
+
+
+
+```python3
+
+fetch_one_column(dataBase: str, table_name: str, column_name: str, condition: str, condition_value: str | int) -> list | None
+
+
+```
+
+Функция fetch_one_column() принимает пять аргументов:
+
+1. dataBase - путь до файла базы данных. Должен передаваться в формате строки формата: "path/filename".
+> <h5>Примечания</h5>
+> Предпочтительно хранить файл базы данных не глубже одной поддиректории от main файла
+
+2. table_name - название таблицы в базе данных. Должен передаваться в формате строки.
+
+3. column_name - названия столбца, откуда необходимо извлечь значение.
+
+4. condition - параметер, по которому будет производится поиск в таблице.
+
+5. condition_value - значение параметра, по которому будет производится поиск в таблице.
+
+
+Пример использования:
+
+```python3
+
+if RegRequests.fetch_one(
+	dataBase="path/filename",
+	table_name="your_table_name",
+	column_name="XYN",
+	condition="id_",
+	condition_value="121212"
+) is None:
+	return 1
+
+```
+> <h5>Примечания</h5>
+> В асинхронном режиме должна вызываться из кроутины и должно присутствовать ключевое слово await.
+<h1></h1>
+
+
+
+
+
 <h5 align="center">Функция exists_test()</h5>
 <h6 align="center">Функция exists_test() используется для проверки существования таблицы.</h6>
 

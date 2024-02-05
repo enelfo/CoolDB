@@ -111,8 +111,7 @@ class RegRequests:
 
 
 	# Функция для получения одного элемента из БД
-	# Если не указать, что мы возвращаем первый элемент _one, то возвращает tuple
-	def fetch_one(dataBase: str, table_name: str, column_name: str, condition: str, condition_value: str | int) -> str | None:
+	def fetch_one(dataBase: str, table_name: str, column_name: str, condition: str, condition_value: str | int) -> list | None:
 		# Пробуем получить элемент при конкретной записи
 		try:
 			# Пока Бд открыта - делаем свои делишки!
@@ -128,6 +127,31 @@ class RegRequests:
 
 				#Указываем, что возвращаем первый элемент из tuple с одним элементом
 				return f"{one_[0]}"
+
+		# При исключение возвращаем NoneType
+		except Exception as e:
+			print(traceback.format_exc())
+			return None
+
+
+
+	# Функция для получения всех элементов одного столбца из БД
+	def fetch_one_column(dataBase: str, table_name: str, column_name: str, condition: str, condition_value: str | int) -> str | None:
+		# Пробуем получить элемент при конкретной записи
+		try:
+			# Пока Бд открыта - делаем свои делишки!
+			with sq.connect(dataBase) as conn:
+				cur = conn.cursor()
+				one_ = cur.execute(f"SELECT {column_name} FROM {table_name} WHERE {condition}={condition_value}")
+				one_ = one_.fetchone()
+				cur.close()	
+
+				# Если записи нет, возвращаем NoneType
+				if one_ == None:
+					return None
+
+				#Указываем, что возвращаем список
+				return one_
 
 		# При исключение возвращаем NoneType
 		except Exception as e:
