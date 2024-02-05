@@ -197,7 +197,7 @@ if RegRequests.insert_to_db(
 
 ```python3
 
-insert_to_db_one_par(dataBase: str, table_name: str, column_name: str | list[str], parameter: str) -> bool
+insert_to_db_one_par(dataBase: str, table_name: str, column_name: str, parameter: str) -> bool
 
 
 ```
@@ -210,7 +210,7 @@ insert_to_db_one_par(dataBase: str, table_name: str, column_name: str | list[str
 
 2. table_name - название таблицы в базе данных. Должен передаваться в формате строки.
 
-3. column_name - названия столбца или столбцов, куда необходимо записать значения.
+3. column_name - названия столбца или столбцов, куда необходимо записать значения. Названия столбцов должны передаваться списком из названий в формате строки.
 
 4. parameter - параметр, который необходимо будет поместить в базу данных или несколько параметров для определенных столбцов. Должны передаваться в формате строки формата "'X', 'Y', 'N'".
 
@@ -222,7 +222,7 @@ insert_to_db_one_par(dataBase: str, table_name: str, column_name: str | list[str
 if RegRequests.insert_to_db_one_par(
 	dataBase="path/filename",
 	table_name="your_table_name",
-	column_name=["forX", "forY", "forN"]
+	column_name="forX, forY, forN"
 	parameter="'X', 'Y', 'N'"
 ) is False:
 	return 1

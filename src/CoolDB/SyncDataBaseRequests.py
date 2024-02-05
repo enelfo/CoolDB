@@ -55,7 +55,7 @@ class RegRequests:
 
 
 	# Функция записи в БД
-	def insert_to_db_one_par(dataBase: str, table_name: str, column_name: str | list[str], parameter: str) -> bool:# Параматры следует передавать так: "'parameters'"
+	def insert_to_db_one_par(dataBase: str, table_name: str, column_name: str, parameter: str) -> bool:# Параматры следует передавать так: "'parameters'"
 		try:
 			# Пока Бд открыта - делаем свои делишки!
 			with sq.connect(dataBase) as conn:
