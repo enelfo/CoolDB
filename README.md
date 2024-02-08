@@ -327,7 +327,7 @@ if RegRequests.fetch_all(
 
 ```python3
 
-fetch_one(dataBase: str, table_name: str, column_name: str, condition: str, condition_value: str | int) -> str | None
+fetch_one(dataBase: str, table_name: str, column_name: str, condition: str, condition_value: str | int) -> Any | None
 
 
 ```
@@ -376,7 +376,7 @@ if RegRequests.fetch_one(
 
 ```python3
 
-fetch_one_column(dataBase: str, table_name: str, column_name: str, condition: str, condition_value: str | int) -> list | None
+fetch_one_column(dataBase: str, table_name: str, column_name: str, condition: str, condition_value: str | int) -> tuple | None
 
 
 ```
@@ -497,7 +497,7 @@ if RegRequests.update_table(
 	new_meaning="URAURAURAURAURA"
 	condition="id_",
 	condition_value="121212"
-) is None:
+) is False:
 	return 1
 
 ```
