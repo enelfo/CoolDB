@@ -83,6 +83,9 @@ class RegRequests:
 				all_ = cur.execute(f"SELECT * FROM {table_name} WHERE {condition}={condition_value}")
 				all_ = all_.fetchall()
 				cur.close()
+				
+				if all_ == []:
+					return None
 
 				return all_
 
@@ -102,6 +105,9 @@ class RegRequests:
 				all_ = cur.execute(f"SELECT * FROM {table_name}")
 				all_ = all_.fetchall()
 				cur.close()
+
+				if all_ == []:
+					return None
 
 				return all_
 

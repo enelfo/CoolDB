@@ -77,6 +77,9 @@ class RegRequests:
 				all_ = await cur.execute(f"SELECT * FROM {table_name} WHERE {condition}={condition_value}")
 				all_ = await all_.fetchall()
 
+				if all_ == []:
+					return None
+
 				return all_
 
 		# При исключение возвращаем NoneType
@@ -93,6 +96,9 @@ class RegRequests:
 			async with sq.connect(dataBase) as cur:
 				all_ = await cur.execute(f"SELECT * FROM {table_name}")
 				all_ = await all_.fetchall()
+
+				if all_ == []:
+					return None
 
 				return all_
 
