@@ -1,5 +1,7 @@
 import sqlite3 as sq
+import traceback
 from typing import Any
+
 
 
 
@@ -20,7 +22,7 @@ class RegRequests:
 				return True
 
 		# При исключение возвращаем ложь
-		except Exception as e:
+		except:
 			print(traceback.format_exc())
 			return False
 
@@ -44,13 +46,13 @@ class RegRequests:
 			with sq.connect(dataBase) as conn:
 				cur = conn.cursor()
 				cur.execute(f"INSERT INTO {table_name} VALUES({parameters_as_str})")
-				cur.commit()
 				cur.close()
+				conn.commit()
 
 				return True
 
 		# При исключение возвращаем ложь
-		except Exception as e:
+		except:
 			print(traceback.format_exc())
 			return False
 
@@ -62,13 +64,13 @@ class RegRequests:
 			with sq.connect(dataBase) as conn:
 				cur = conn.cursor()
 				cur.execute(f"INSERT INTO {table_name} ({column_name}) VALUES({parameter})")
-				cur.commit()
 				cur.close()
+				conn.commit()
 
 				return True
 
 		# При исключение возвращаем ложь
-		except Exception as e:
+		except:
 			print(traceback.format_exc())
 			return False
 
@@ -90,7 +92,7 @@ class RegRequests:
 				return all_
 
 		# При исключение возвращаем NoneType
-		except Exception as e:
+		except:
 			print(traceback.format_exc())
 			return None
 
@@ -112,7 +114,7 @@ class RegRequests:
 				return all_
 
 		# При исключение возвращаем NoneType
-		except Exception as e:
+		except:
 			print(traceback.format_exc())
 			return None
 
@@ -136,7 +138,7 @@ class RegRequests:
 				return one_[0]
 
 		# При исключение возвращаем NoneType
-		except Exception as e:
+		except:
 			print(traceback.format_exc())
 			return None
 
@@ -161,7 +163,7 @@ class RegRequests:
 				return one_
 
 		# При исключение возвращаем NoneType
-		except Exception as e:
+		except:
 			print(traceback.format_exc())
 			return None
 
@@ -179,7 +181,7 @@ class RegRequests:
 				return exists
 
 		# При исключение возвращаем ложь
-		except Exception as e:
+		except:
 			print(traceback.format_exc())
 			return False
 
@@ -192,13 +194,13 @@ class RegRequests:
 			with sq.connect(dataBase) as conn:
 				cur = conn.cursor()
 				cur.execute(f"UPDATE {table_name} SET {column_name}={new_meaning} WHERE {condition}='{condition_value}'")
-				cur.commit()
 				cur.close()
+				conn.commit()
 
 				return True
 
 		# При исключение возвращаем ложь
-		except Exception as e:
+		except:
 			print(traceback.format_exc())
 			return False
 
@@ -211,15 +213,14 @@ class RegRequests:
 			with sq.connect(dataBase) as conn:
 				cur = conn.cursor()
 				cur.execute(f"DELETE FROM {table_name} WHERE {condition}='{condition_value}'")
-				cur.commit()
 				cur.close()
+				conn.commit()
 
 				return True
 
 		# При исключение возвращаем ложь
-		except Exception as e:
+		except:
 			print(traceback.format_exc())
-			print(e)
 			return False
 
 
@@ -236,7 +237,7 @@ class RegRequests:
 				return True
 
 		# При исключение возвращаем ложь
-		except Exception as e:
+		except:
 			print(traceback.format_exc())
 			return False
 

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "CoolDB"
-version = "0.1.9.01"
+version = "0.1.9.2"
 authors = [
   { name="enelfo", email="enelfo0911@gmail.com" },
 ]
