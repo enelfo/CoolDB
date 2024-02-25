@@ -80,7 +80,7 @@ class RegRequests:
 			# Пока Бд открыта - делаем свои делишки!
 			with sq.connect(dataBase) as conn:
 				cur = conn.cursor()
-				all_ = cur.execute(f"SELECT * FROM {table_name} WHERE {condition}={condition_value}")
+				all_ = cur.execute(f"SELECT * FROM {table_name} WHERE {condition}='{condition_value}'")
 				all_ = all_.fetchall()
 				cur.close()
 				
@@ -124,7 +124,7 @@ class RegRequests:
 			# Пока Бд открыта - делаем свои делишки!
 			with sq.connect(dataBase) as conn:
 				cur = conn.cursor()
-				one_ = cur.execute(f"SELECT {column_name} FROM {table_name} WHERE {condition}={condition_value}")
+				one_ = cur.execute(f"SELECT {column_name} FROM {table_name} WHERE {condition}='{condition_value}'")
 				one_ = one_.fetchone()
 				cur.close()	
 
@@ -149,7 +149,7 @@ class RegRequests:
 			# Пока Бд открыта - делаем свои делишки!
 			with sq.connect(dataBase) as conn:
 				cur = conn.cursor()
-				one_ = cur.execute(f"SELECT {column_name} FROM {table_name} WHERE {condition}={condition_value}")
+				one_ = cur.execute(f"SELECT {column_name} FROM {table_name} WHERE {condition}='{condition_value}'")
 				one_ = one_.fetchone()
 				cur.close()	
 
@@ -185,13 +185,13 @@ class RegRequests:
 
 
 	# Функция обновления элемента в таблице БД
-	def update_table(dataBase: str, table_name: str, column_name: str, new_meaning: str, condition: str, condition_value: str | int) -> bool:
+	def update_table(dataBase: str, table_name: str, column_name: str, new_meaning: str | int, condition: str, condition_value: str | int) -> bool:
 		# Побуем заапдейтить элемент
 		try:
 			# Пока Бд открыта - делаем свои делишки!
 			with sq.connect(dataBase) as conn:
 				cur = conn.cursor()
-				cur.execute(f"UPDATE {table_name} SET {column_name}={new_meaning} WHERE {condition}={condition_value}")
+				cur.execute(f"UPDATE {table_name} SET {column_name}={new_meaning} WHERE {condition}='{condition_value}'")
 				cur.commit()
 				cur.close()
 
@@ -210,7 +210,7 @@ class RegRequests:
 			# Пока Бд открыта - делаем свои делишки!
 			with sq.connect(dataBase) as conn:
 				cur = conn.cursor()
-				cur.execute(f"DELETE FROM {table_name} WHERE {condition}={condition_value}")
+				cur.execute(f"DELETE FROM {table_name} WHERE {condition}='{condition_value}'")
 				cur.commit()
 				cur.close()
 

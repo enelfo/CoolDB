@@ -464,7 +464,7 @@ if RegRequests.exists_test(
 
 ```python3
 
-update_table(dataBase: str, table_name: str, column_name: str, new_meaning: str, condition: str, condition_value: str | int) -> bool
+update_table(dataBase: str, table_name: str, column_name: str, new_meaning: str | int, condition: str, condition_value: str | int) -> bool
 
 
 ```

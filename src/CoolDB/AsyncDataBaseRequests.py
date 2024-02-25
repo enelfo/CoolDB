@@ -74,7 +74,7 @@ class RegRequests:
 		try:
 			# Пока Бд открыта - делаем свои делишки!
 			async with sq.connect(dataBase) as cur:
-				all_ = await cur.execute(f"SELECT * FROM {table_name} WHERE {condition}={condition_value}")
+				all_ = await cur.execute(f"SELECT * FROM {table_name} WHERE {condition}='{condition_value}'")
 				all_ = await all_.fetchall()
 
 				if all_ == []:
@@ -114,7 +114,7 @@ class RegRequests:
 		try:
 			# Пока Бд открыта - делаем свои делишки!
 			async with sq.connect(dataBase) as cur:
-				one_ = await cur.execute(f"SELECT {column_name} FROM {table_name} WHERE {condition}={condition_value}")
+				one_ = await cur.execute(f"SELECT {column_name} FROM {table_name} WHERE {condition}='{condition_value}'")
 				one_ = await one_.fetchone()
 
 				# Если записи нет, возвращаем NoneType
@@ -137,7 +137,7 @@ class RegRequests:
 		try:
 			# Пока Бд открыта - делаем свои делишки!
 			async with sq.connect(dataBase) as cur:
-				one_ = await cur.execute(f"SELECT {column_name} FROM {table_name} WHERE {condition}={condition_value}")
+				one_ = await cur.execute(f"SELECT {column_name} FROM {table_name} WHERE {condition}='{condition_value}'")
 				one_ = await one_.fetchone()
 
 				# Если записи нет, возвращаем NoneType
@@ -169,12 +169,12 @@ class RegRequests:
 
 
 	# Функция обновления элемента в таблице БД
-	async def update_table(dataBase: str, table_name: str, column_name: str, new_meaning: str, condition: str, condition_value: str | int) -> bool:
+	async def update_table(dataBase: str, table_name: str, column_name: str, new_meaning: str | int, condition: str, condition_value: str | int) -> bool:
 		# Побуем заапдейтить элемент
 		try:
 			# Пока Бд открыта - делаем свои делишки!
 			async with sq.connect(dataBase) as cur:
-				await cur.execute(f"UPDATE {table_name} SET {column_name}={new_meaning} WHERE {condition}={condition_value}")
+				await cur.execute(f"UPDATE {table_name} SET {column_name}='{new_meaning}' WHERE {condition}='{condition_value}'")
 				await cur.commit()
 				return True
 
@@ -190,7 +190,7 @@ class RegRequests:
 		try:
 			# Пока Бд открыта - делаем свои делишки!
 			async with sq.connect(dataBase) as cur:
-				await cur.execute(f"DELETE FROM {table_name} WHERE {condition}={condition_value}")
+				await cur.execute(f"DELETE FROM {table_name} WHERE {condition}='{condition_value}'")
 				await cur.commit()
 				return True
 
