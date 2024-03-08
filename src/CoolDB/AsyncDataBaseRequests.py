@@ -168,6 +168,7 @@ class RegRequests:
 			return False
 
 
+
 	# Функция обновления элемента в таблице БД
 	async def update_table(dataBase: str, table_name: str, column_name: str, new_meaning: str | int, condition: str, condition_value: str | int) -> bool:
 		# Побуем заапдейтить элемент
@@ -182,6 +183,7 @@ class RegRequests:
 		except Exception as e:
 			print(traceback.format_exc())
 			return False
+
 
 
 	# Функция удаляет элемент из таблицы в БД
@@ -213,5 +215,153 @@ class RegRequests:
 		except Exception as e:
 			print(traceback.format_exc())
 			return False
+
+
+
+
+
+class MultiConditionsRequests():
+	# Функция получения всего при конкретной записи
+	async def fetch_all_where(dataBase: str, table_name: str, conditions: list, condition_values: list) -> list[dict] | None:
+		# Пробуем получить все данные расположенные при конкретной записи
+		try:
+			# Пока Бд открыта - делаем свои делишки!
+			async with sq.connect(dataBase) as cur:
+				for i in range(condition):
+					if i == 0:
+						command = f"SELECT {column_name} FROM {table_name} WHERE {condition[i]}='{condition_value[i]}'"
+
+					else:
+						command += f" AND {condition[i]}='{condition_value[i]}'"
+
+				all_ = await cur.execute(command)
+				all_ = await all_.fetchall()
+
+				if all_ == []:
+					return None
+
+				return all_
+
+		# При исключение возвращаем NoneType
+		except Exception as e:
+			print(traceback.format_exc())
+			return None
+
+
+
+	# Функция для получения одного элемента из БД
+	async def fetch_one(dataBase: str, table_name: str, column_name: str, conditions: list, condition_values: list) -> Any | None:
+		# Пробуем получить элемент при конкретной записи
+		try:
+			# Пока Бд открыта - делаем свои делишки!
+			async with sq.connect(dataBase) as cur:
+				for i in range(condition):
+					if i == 0:
+						command = f"SELECT {column_name} FROM {table_name} WHERE {condition[i]}='{condition_value[i]}'"
+
+					else:
+						command += f" AND {condition[i]}='{condition_value[i]}'"
+
+				one_ = await cur.execute(command)
+				one_ = await one_.fetchone()
+
+				# Если записи нет, возвращаем NoneType
+				if one_ == None:
+					return None
+
+				#Указываем, что возвращаем первый элемент из tuple с одним элементом
+				return one_[0]
+
+		# При исключение возвращаем NoneType
+		except Exception as e:
+			print(traceback.format_exc())
+			return None
+
+
+
+	# Функция для получения всех элементов одного столбца из БД
+	async def fetch_one_column(dataBase: str, table_name: str, column_name: str, conditions: list, condition_values: list) -> tuple | None:
+		# Пробуем получить элемент при конкретной записи
+		try:
+			# Пока Бд открыта - делаем свои делишки!
+			async with sq.connect(dataBase) as cur:
+				for i in range(condition):
+					if i == 0:
+						command = f"SELECT {column_name} FROM {table_name} WHERE {condition[i]}='{condition_value[i]}'"
+
+					else:
+						command += f" AND {condition[i]}='{condition_value[i]}'"
+
+				one_ = await cur.execute(command)
+				one_ = await one_.fetchone()
+
+				# Если записи нет, возвращаем NoneType
+				if one_ == None:
+					return None
+
+				#Указываем, что возвращаем tuple
+				return one_
+
+		# При исключение возвращаем NoneType
+		except Exception as e:
+			print(traceback.format_exc())
+			return None
+
+
+
+		# Функция обновления элемента в таблице БД
+	async def update_table(dataBase: str, table_name: str, column_name: str, new_meaning: str | int, conditions: list, condition_values: list) -> bool:
+		# Побуем заапдейтить элемент
+		try:
+			# Пока Бд открыта - делаем свои делишки!
+			async with sq.connect(dataBase) as cur:
+				for i in range(condition):
+					if i == 0:
+						command = f"UPDATE {table_name} SET {column_name}='{new_meaning}' WHERE {condition[i]}='{condition_value[i]}'"
+
+					else:
+						command += f" AND {condition[i]}='{condition_value[i]}'"
+
+				await cur.execute(command)
+				await cur.commit()
+				return True
+
+		# При исключение возвращаем ложь
+		except Exception as e:
+			print(traceback.format_exc())
+			return False
+
+
+
+	# Функция удаляет элемент из таблицы в БД
+	async def delete_from_table(dataBase: str, table_name: str, conditions: list, condition_values: list) -> bool:
+		# Пробуем удалить информацию из таблицы из БД в конкретном месте
+		try:
+			# Пока Бд открыта - делаем свои делишки!
+			async with sq.connect(dataBase) as cur:
+				for i in range(condition):
+					if i == 0:
+						command = f"SELECT {column_name} FROM {table_name} WHERE {condition[i]}='{condition_value[i]}'"
+
+					else:
+						command += f" AND {condition[i]}='{condition_value[i]}'"
+
+				await cur.execute(command)
+				await cur.commit()
+				return True
+
+		# При исключение возвращаем ложь
+		except Exception as e:
+			print(traceback.format_exc())
+			return False
+
+
+
+
+
+
+
+
+
 
 

@@ -98,7 +98,7 @@ if __name__ == "__main__":
 
 
 <h3 align="center">Документация</h3>
-<h6 align="center">В CoolDB собраны регулярные функции взаимодействия с базами данных и помещены в класс RegRequest модуля SyncDataBaseRequests или AsyncDataBaseRequests:</h6>
+<h6 align="center">В CoolDB собраны регулярные функции взаимодействия с базами данных и помещены в класс RegRequest модуля SyncDataBaseRequests или AsyncDataBaseRequests и, начиная с версии 0.2, ряд функция был дополнен классом MultiConditionsRequests, далее в документации функции, которые вошли в этот класс будут помечены:</h6>
 <h1></h1>
 
 
@@ -242,7 +242,11 @@ if RegRequests.insert_to_db_one_par(
 
 ```python3
 
+###Для класса ReqRequests###
 fetch_all_where(dataBase: str, table_name: str, condition: str, condition_value: str | int) -> list[dict] | None
+
+###Для класса MultiConditionsRequests###
+fetch_all_where(dataBase: str, table_name: str, condition: list, condition_value: list) -> list[dict] | None
 
 
 ```
@@ -264,11 +268,27 @@ fetch_all_where(dataBase: str, table_name: str, condition: str, condition_value:
 
 ```python3
 
+###Для класса ReqRequests###
 if RegRequests.fetch_all_where(
 	dataBase="path/filename",
 	table_name="your_table_name",
 	condition="id_",
 	condition_value="121212"
+) is None:
+	return 1
+
+###Для класса MultiConditionsRequests###
+if MultiConditionsRequests.fetch_all_where(
+	dataBase="path/filename",
+	table_name="your_table_name",
+	condition=[
+		"id_",
+		"time"
+	],
+	condition_value=[
+		"121212",
+		"145353"
+	]
 ) is None:
 	return 1
 
@@ -327,7 +347,11 @@ if RegRequests.fetch_all(
 
 ```python3
 
+###Для класса ReqRequests###
 fetch_one(dataBase: str, table_name: str, column_name: str, condition: str, condition_value: str | int) -> Any | None
+
+###Для класса MultiConditionsRequests###
+fetch_one(dataBase: str, table_name: str, column_name: str, condition: list, condition_value: list) -> Any | None
 
 
 ```
@@ -351,12 +375,29 @@ fetch_one(dataBase: str, table_name: str, column_name: str, condition: str, cond
 
 ```python3
 
+###Для класса ReqRequests###
 if RegRequests.fetch_one(
 	dataBase="path/filename",
 	table_name="your_table_name",
 	column_name="XYN",
 	condition="id_",
 	condition_value="121212"
+) is None:
+	return 1
+
+###Для класса MultiConditionsRequests###
+if MultiConditionsRequests.fetch_one(
+	dataBase="path/filename",
+	table_name="your_table_name",
+	column_name="XYN",
+	condition=[
+		"id_",
+		"time"
+	],
+	condition_value=[
+		"121212",
+		"145353"
+	]
 ) is None:
 	return 1
 
@@ -376,8 +417,12 @@ if RegRequests.fetch_one(
 
 ```python3
 
+###Для класса ReqRequests###
 fetch_one_column(dataBase: str, table_name: str, column_name: str, condition: str, condition_value: str | int) -> tuple | None
 
+
+###Для класса MultiConditionsRequests###
+fetch_one_column(dataBase: str, table_name: str, column_name: str, condition: list, condition_value: list) -> tuple | None
 
 ```
 
@@ -400,12 +445,29 @@ fetch_one_column(dataBase: str, table_name: str, column_name: str, condition: st
 
 ```python3
 
+###Для класса ReqRequests###
 if RegRequests.fetch_one(
 	dataBase="path/filename",
 	table_name="your_table_name",
 	column_name="XYN",
 	condition="id_",
 	condition_value="121212"
+) is None:
+	return 1
+
+###Для класса MultiConditionsRequests###
+if MultiConditionsRequests.fetch_one(
+	dataBase="path/filename",
+	table_name="your_table_name",
+	column_name="XYN",
+	condition=[
+		"id_",
+		"time"
+	],
+	condition_value=[
+		"121212",
+		"145353"
+	]
 ) is None:
 	return 1
 
@@ -464,7 +526,11 @@ if RegRequests.exists_test(
 
 ```python3
 
+###Для класса ReqRequests###
 update_table(dataBase: str, table_name: str, column_name: str, new_meaning: str | int, condition: str, condition_value: str | int) -> bool
+
+###Для класса MultiConditionsRequests###
+update_table(dataBase: str, table_name: str, column_name: str, new_meaning: str | int, condition: list, condition_value: list) -> bool
 
 
 ```
@@ -490,6 +556,7 @@ update_table(dataBase: str, table_name: str, column_name: str, new_meaning: str 
 
 ```python3
 
+###Для класса ReqRequests###
 if RegRequests.update_table(
 	dataBase="path/filename",
 	table_name="your_table_name",
@@ -497,6 +564,23 @@ if RegRequests.update_table(
 	new_meaning="URAURAURAURAURA"
 	condition="id_",
 	condition_value="121212"
+) is False:
+	return 1
+
+###Для класса MultiConditionsRequests###
+if MultiConditionsRequests.update_table(
+	dataBase="path/filename",
+	table_name="your_table_name",
+	column_name="XYN",
+	new_meaning="URAURAURAURAURA"
+	condition=[
+		"id_",
+		"time"
+	],
+	condition_value=[
+		"121212",
+		"145353"
+	]
 ) is False:
 	return 1
 
@@ -515,7 +599,11 @@ if RegRequests.update_table(
 
 ```python3
 
+###Для класса ReqRequests###
 delete_from_table(dataBase: str, table_name: str, condition: str, condition_value: str | int) -> bool
+
+###Для класса MultiConditionsRequests###
+delete_from_table(dataBase: str, table_name: str, condition: list, condition_value: list) -> bool
 
 
 ```
@@ -537,11 +625,27 @@ delete_from_table(dataBase: str, table_name: str, condition: str, condition_valu
 
 ```python3
 
+###Для класса ReqRequests###
 if RegRequests.delete_from_table(
 	dataBase="path/filename",
 	table_name="your_table_name",
 	condition="id_",
 	condition_value="121212"
+) is False:
+	return 1
+
+###Для класса MultiConditionsRequests###
+if MultiConditionsRequests.delete_from_table(
+	dataBase="path/filename",
+	table_name="your_table_name",
+	condition=[
+		"id_",
+		"time"
+	],
+	condition_value=[
+		"121212",
+		"145353"
+	]
 ) is False:
 	return 1
 

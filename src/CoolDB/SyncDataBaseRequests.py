@@ -242,3 +242,163 @@ class RegRequests:
 			return False
 
 
+
+
+
+class MultiConditionsRequests():
+	# Функция получения всего при конкретной записи
+	def fetch_all_where(dataBase: str, table_name: str, condition: list, condition_value: list) -> list[dict] | None:
+		# Пробуем получить все данные расположенные при конкретной записи
+		try:
+			# Пока Бд открыта - делаем свои делишки!
+			with sq.connect(dataBase) as conn:
+				for i in range(condition):
+					if i == 0:
+						command = f"SELECT {column_name} FROM {table_name} WHERE {condition[i]}='{condition_value[i]}'"
+
+					else:
+						command += f" AND {condition[i]}='{condition_value[i]}'"
+
+				cur = conn.cursor()
+				all_ = cur.execute(command)
+				all_ = all_.fetchall()
+				cur.close()
+				
+				if all_ == []:
+					return None
+
+				return all_
+
+		# При исключение возвращаем NoneType
+		except:
+			print(traceback.format_exc())
+			return None
+
+
+
+		# Функция для получения одного элемента из БД
+	def fetch_one(dataBase: str, table_name: str, column_name: str, condition: list, condition_value: list) -> Any | None:
+		# Пробуем получить элемент при конкретной записи
+		try:
+			# Пока Бд открыта - делаем свои делишки!
+			with sq.connect(dataBase) as conn:
+				for i in range(condition):
+					if i == 0:
+						command = f"SELECT {column_name} FROM {table_name} WHERE {condition[i]}='{condition_value[i]}'"
+
+					else:
+						command += f" AND {condition[i]}='{condition_value[i]}'"
+
+				cur = conn.cursor()
+				one_ = cur.execute(command)
+				one_ = one_.fetchone()
+				cur.close()	
+
+				# Если записи нет, возвращаем NoneType
+				if one_ == None:
+					return None
+
+				#Указываем, что возвращаем первый элемент из tuple с одним элементом
+				return one_[0]
+
+		# При исключение возвращаем NoneType
+		except:
+			print(traceback.format_exc())
+			return None
+
+
+
+	# Функция для получения всех элементов одного столбца из БД
+	def fetch_one_column(dataBase: str, table_name: str, column_name: str, condition: list, condition_value: list) -> tuple | None:
+		# Пробуем получить элемент при конкретной записи
+		try:
+			# Пока Бд открыта - делаем свои делишки!
+			with sq.connect(dataBase) as conn:
+				for i in range(condition):
+					if i == 0:
+						command = f"SELECT {column_name} FROM {table_name} WHERE {condition[i]}='{condition_value[i]}'"
+
+					else:
+						command += f" AND {condition[i]}='{condition_value[i]}'"
+
+				cur = conn.cursor()
+				one_ = cur.execute(command)
+				one_ = one_.fetchone()
+				cur.close()	
+
+				# Если записи нет, возвращаем NoneType
+				if one_ == None:
+					return None
+
+				#Указываем, что возвращаем tuple
+				return one_
+
+		# При исключение возвращаем NoneType
+		except:
+			print(traceback.format_exc())
+			return None
+
+
+
+		# Функция обновления элемента в таблице БД
+	def update_table(dataBase: str, table_name: str, column_name: str, new_meaning: str | int, condition: list, condition_value: list) -> bool:
+		# Побуем заапдейтить элемент
+		try:
+			# Пока Бд открыта - делаем свои делишки!
+			with sq.connect(dataBase) as conn:
+				for i in range(condition):
+					if i == 0:
+						command = f"UPDATE {table_name} SET {column_name}='{new_meaning}' WHERE {condition[i]}='{condition_value[i]}'"
+
+					else:
+						command += f" AND {condition[i]}='{condition_value[i]}'"
+
+				cur = conn.cursor()
+				cur.execute(command)
+				cur.close()
+				conn.commit()
+
+				return True
+
+		# При исключение возвращаем ложь
+		except:
+			print(traceback.format_exc())
+			return False
+
+
+	# Функция удаляет элемент из таблицы в БД
+	def delete_from_table(dataBase: str, table_name: str, condition: list, condition_value: list) -> bool:
+		# Пробуем удалить информацию из таблицы из БД в конкретном месте
+		try:
+			# Пока Бд открыта - делаем свои делишки!
+			with sq.connect(dataBase) as conn:
+				for i in range(condition):
+					if i == 0:
+						command = f"SELECT {column_name} FROM {table_name} WHERE {condition[i]}='{condition_value[i]}'"
+
+					else:
+						command += f" AND {condition[i]}='{condition_value[i]}'"
+
+				cur = conn.cursor()
+				cur.execute(command)
+				cur.close()
+				conn.commit()
+
+				return True
+
+		# При исключение возвращаем ложь
+		except:
+			print(traceback.format_exc())
+			return False
+
+
+
+
+
+
+
+
+
+
+
+
